@@ -13,7 +13,7 @@ Random rand = new Random();
 int randomint = rand.nextInt(65535);
 list.add(randomint);
 }
-void Encrypt()
+void Encrypt() // Blind signature
 {
   for(int v:list)
   {
