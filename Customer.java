@@ -1,11 +1,15 @@
 import java.io.*;
 import java.util.*;
+import java.net.*;
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.math.BigInteger;
 public class Customer
 {
 public static ArrayList<Integer> list = new ArrayList<>();
+private String Identity;
 ArrayList<Integer> list1 = new ArrayList<>();
 void Random_generator()
 {
@@ -13,7 +17,7 @@ Random rand = new Random();
 int randomint = rand.nextInt(65535);
 list.add(randomint);
 }
-void Encrypt() // Blind signature
+void Blinding() // Blind signature
 {
   for(int v:list)
   {
@@ -26,6 +30,18 @@ void Encrypt() // Blind signature
     System.out.println(v1);
   }
 }
+void Unblindkey()
+{
+  System.out.println("unblindkey");
+}
+void Secret_Split();
+{
+  System.out.println("Secret split");
+}
+void Bit_commit()
+{
+  System.out.println("Bitcommit");
+}
 void printval()
 {
   for(int x:list)
@@ -33,18 +49,9 @@ void printval()
     System.out.println(x);
   }
 }
-public static void main(String[] args)
+public Customer(String name,int SSN)
 {
-System.out.println("digital cash");
-System.out.println("Enter the amount of the Digital cash order");
-Random rand1 = new Random();
-int random2= rand1.nextInt(10);
-Customer call = new Customer();
-for(int i=0;i<random2;i++)
-{
-  call.Random_generator();
-}
-call.printval();
-call.Encrypt();
+Identity=name+Integer.toString(SSN);
+System.out.println(Identity);
 }
 }
