@@ -44,19 +44,17 @@ case "Customer":
       System.out.println("Enter the money order amount");
       int moneyorder=sc.nextInt();
       Customer c = new Customer(name,ssn);
-      Random rand1= new Random();
-      int loopvar = rand1.nextInt(10);
-      System.out.println(loopvar);
+      c.Create_Moneyorder(moneyorder);
       break;
 case "Merchant":
-    System.out.println("Merchant option");
-    break;
+      System.out.println("Merchant option");
+      break;
 case "Exit":
-   t=false;
-   break;
+      t=false;
+      break;
 default:
-  System.out.println("Enter correct option");
-  break;
+      System.out.println("Enter correct option");
+      break;
 }
 }
 }

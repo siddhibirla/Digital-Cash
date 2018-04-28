@@ -4,39 +4,54 @@ import java.net.*;
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
 import java.math.BigInteger;
 public class Customer
 {
 public static ArrayList<Integer> list = new ArrayList<>();
+public static ArrayList<String> random = new ArrayList<>();
 private String Identity;
-ArrayList<Integer> list1 = new ArrayList<>();
-void Random_generator()
+public int random_orders;
+ArrayList<String> order_list = new ArrayList<>();
+String UniqueID() // To create Unique ID
 {
-Random rand = new Random();
-int randomint = rand.nextInt(65535);
-list.add(randomint);
+  String s ="";
+  Random r= new Random();
+  while(s.length()<10)
+  {
+    int r1= r.nextInt(9);
+    s=s+Integer.toString(r1);
+  }
+  return s;
 }
-void Blinding() // Blind signature
+void Create_Moneyorder(int orderval)
 {
-  for(int v:list)
-  {
-    Random rand2=new Random();
-    int randomint2=rand2.nextInt(65535);
-    list1.add(randomint2);
-  }
-  for(int v1:list1)
-  {
-    System.out.println(v1);
-  }
+for(int i=0;i<random_orders;i++)
+{
+String order_req="";
+String ID=UniqueID();
+while(random.contains(ID))
+{
+  ID=UniqueID();
+}
+order_req=ID+" "+Integer.toString(orderval);
+order_list.add(order_req);
+System.out.println(order_req);
+random.add(ID);
+}
+}
+void Blinding() //RSA Blind signature
+{
+System.out.println("Blinding");
 }
 void Unblindkey()
 {
   System.out.println("unblindkey");
 }
-void Secret_Split();
+void Secret_Split()
 {
-  System.out.println("Secret split");
+System.out.println("Secret_Split");
 }
 void Bit_commit()
 {
@@ -52,6 +67,7 @@ void printval()
 public Customer(String name,int SSN)
 {
 Identity=name+Integer.toString(SSN);
-System.out.println(Identity);
+Random rand = new Random();
+random_orders=rand.nextInt(10);
 }
 }
