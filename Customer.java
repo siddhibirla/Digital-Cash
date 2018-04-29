@@ -11,6 +11,7 @@ public class Customer
 {
 public static ArrayList<Integer> list = new ArrayList<>();
 public static ArrayList<String> random = new ArrayList<>();
+public static ArrayList<BigInteger> Sym_Key= new ArrayList<>();
 private String Identity;
 public int random_orders;
 ArrayList<String> order_list = new ArrayList<>();
@@ -43,7 +44,16 @@ random.add(ID);
 }
 void Blinding() //RSA Blind signature
 {
-System.out.println("Blinding");
+Random r = new Random();
+int bitlength=1024;
+for(int i=0;i<order_list.size();i++)
+{
+String message=order_list.get(i);
+BigInteger k = BigInteger.probablePrime(bitlength,r);
+Sym_Key.add(k);
+//byte[] encrypted=(((new BigInteger(message)).multiply(k.modPow(e,n))).toByteArray());
+//String encryptedmessage=new String(encrypted);
+}
 }
 void Unblindkey()
 {
