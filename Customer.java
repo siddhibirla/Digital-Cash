@@ -17,10 +17,10 @@ public class Customer
 public static ArrayList<String> list = new ArrayList<>();
 public static ArrayList<String> random = new ArrayList<>();
 public static ArrayList<BigInteger> Sym_Key= new ArrayList<>();
-private String Identity;
-public int random_orders;
-private ArrayList<String> order_list = new ArrayList<>();
-public String UniqueID() // To create Unique ID
+private static String Identity;
+public static int random_orders;
+private static ArrayList<String> order_list = new ArrayList<>();
+public static String UniqueID() // To create Unique ID
 {
   String s ="";
   Random r= new Random();
@@ -31,7 +31,7 @@ public String UniqueID() // To create Unique ID
   }
   return s;
 }
-void Create_Moneyorder(int orderval)
+int Create_Moneyorder(int orderval)
 {
 for(int i=0;i<random_orders;i++)
 {
@@ -46,6 +46,7 @@ order_list.add(order_req);
 //System.out.println(order_req);
 random.add(ID);
 }
+return random_orders;
 }
 public void Blinding(BigInteger public_key1,BigInteger Mod) //RSA Blind signature
 {
@@ -54,7 +55,7 @@ int bitlength=1024;
 for(int i=0;i<order_list.size();i++)
 {
 String m1=order_list.get(i);
-System.out.println(order_list.size());
+//System.out.println(order_list.size());
 byte[] message = m1.getBytes();
 BigInteger k = BigInteger.probablePrime(bitlength,r);
 Sym_Key.add(k);
@@ -63,11 +64,11 @@ String encryptedmessage=new String(encrypted);
 System.out.println(encryptedmessage);
 list.add(encryptedmessage);
 }
-System.out.println(list.size());
+//System.out.println(list.size());
 }
-void Unblindkey()
+void Unblindkey(int unblind_var)
 {
-  System.out.println("unblindkey");
+  System.out.println(unblind_var);
 }
 void Secret_Split()
 {
@@ -79,12 +80,18 @@ void Bit_commit()
 }
 void printval()
 {
-  System.out.println("printval");
+  for(int i=0;i<order_list.size();i++)
+  {
+    System.out.println(order_list.get(i));
+  }
 }
 public Customer(String name,int SSN)
 {
 Identity=name+Integer.toString(SSN);
 Random rand = new Random();
 random_orders=rand.nextInt(10);
+}
+public Customer()
+{
 }
 }

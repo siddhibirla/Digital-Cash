@@ -17,6 +17,7 @@ public class Init
 public static void main(String[] args)
 {
 boolean t=true;
+int total_orders=0;
 String filename="PK_M.txt";
 String line="";
 String line1="";
@@ -37,7 +38,6 @@ catch(Exception e)
 {
   System.out.println("File not found");
 }
-//System.out.println(line1);
 String array3[] = line1.split("::");
 public_key = new BigInteger(array3[0]);
 modulusn = new BigInteger(array3[1]);
@@ -46,17 +46,20 @@ phi= new BigInteger(array3[2]);
 System.out.println(modulusn);
 System.out.println(phi);
 System.out.println(array3[0]);*/
+Customer c =new Customer();
 while(t)
 {
 System.out.println("Select Option :");
 System.out.println("1. Customer");
-System.out.println("2. Merchant");
-System.out.println("3.Exit");
+System.out.println("2. Bank");
+System.out.println("3. Merchant");
+System.out.println("4. Exit");
 Scanner sc=new Scanner(System.in);
 String option=sc.nextLine();
 switch(option)
 {
 case "Customer":
+      System.out.println("Customer option selected");
       String name="";
       int ssn=0;
       System.out.println("Enter your Name and SSN");
@@ -78,12 +81,21 @@ case "Customer":
       }
       System.out.println("Enter the money order amount");
       int moneyorder=sc.nextInt();
-      Customer c = new Customer(name,ssn);
-      c.Create_Moneyorder(moneyorder);
+      c= new Customer(name,ssn);
+      total_orders=c.Create_Moneyorder(moneyorder);
       c.Blinding(public_key,modulusn);
       break;
+case "Bank":
+      int unblindvar=0;
+      System.out.println("Bank option selected");
+      Bank b = new Bank(total_orders);
+      int z =b.to_selectorder();
+      unblindvar=z;
+      c.Unblindkey(z);
+      c.printval();
+      System.out.println(z);
 case "Merchant":
-      System.out.println("Merchant option");
+      System.out.println("Merchant option selected");
       break;
 case "Exit":
       t=false;
