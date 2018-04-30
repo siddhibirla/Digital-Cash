@@ -46,6 +46,8 @@ phi= new BigInteger(array3[2]);
 System.out.println(modulusn);
 System.out.println(phi);
 System.out.println(array3[0]);*/
+while(t)
+{
 System.out.println("Select Option :");
 System.out.println("1. Customer");
 System.out.println("2. Merchant");
@@ -89,6 +91,7 @@ case "Exit":
 default:
       System.out.println("Enter correct option");
       break;
+}
 }
 }
 }
