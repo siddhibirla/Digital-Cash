@@ -1,2 +1,22 @@
-Digital Cash Project
-Documentation
+#Digital Cash Project
+#Documentation
+This Project Consists of 4 Classes
+1. Init
+2. Customer
+3. Bank
+4. Merchant
+
+Init
+
+
+
+Customer
+
+
+
+
+Bank
+
+
+
+Merchant
