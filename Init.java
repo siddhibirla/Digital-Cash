@@ -5,7 +5,13 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.ArrayList;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
+import javax.crypto.*;
 public class Init
 {
 public static void main(String[] args)
@@ -33,7 +39,13 @@ catch(Exception e)
 }
 //System.out.println(line1);
 String array3[] = line1.split("::");
-System.out.println(array3[0]);
+public_key = new BigInteger(array3[0]);
+modulusn = new BigInteger(array3[1]);
+phi= new BigInteger(array3[2]);
+/*System.out.println(public_key);
+System.out.println(modulusn);
+System.out.println(phi);
+System.out.println(array3[0]);*/
 System.out.println("Select Option :");
 System.out.println("1. Customer");
 System.out.println("2. Merchant");
@@ -66,11 +78,7 @@ case "Customer":
       int moneyorder=sc.nextInt();
       Customer c = new Customer(name,ssn);
       c.Create_Moneyorder(moneyorder);
-      for(int i=0;i<c.random.size();i++)
-      {
-        System.out.println("From Customer random");
-        System.out.println(c.random.get(i));
-      }
+      c.Blinding(public_key,modulusn);
       break;
 case "Merchant":
       System.out.println("Merchant option");
