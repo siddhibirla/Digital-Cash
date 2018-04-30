@@ -10,6 +10,10 @@ public class Merchant
 {
 public Merchant()
 {
-  System.out.println("Merchant class created");
+  System.out.println(new String(decrypted));
+}
+public challenge()
+{
+  System.out.println("Challenge");
 }
 }

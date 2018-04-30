@@ -11,8 +11,29 @@ public class Init
 public static void main(String[] args)
 {
 boolean t=true;
-while(t)
+String filename="PK_M.txt";
+String line="";
+String line1="";
+BigInteger public_key;
+BigInteger modulusn;
+BigInteger phi;
+try
 {
+FileReader filereader = new FileReader(filename);
+BufferedReader buff = new BufferedReader(filereader);
+while((line=buff.readLine())!=null)
+{
+line1=line1+line;
+}
+buff.close();
+}
+catch(Exception e)
+{
+  System.out.println("File not found");
+}
+//System.out.println(line1);
+String array3[] = line1.split("::");
+System.out.println(array3[0]);
 System.out.println("Select Option :");
 System.out.println("1. Customer");
 System.out.println("2. Merchant");
@@ -45,6 +66,11 @@ case "Customer":
       int moneyorder=sc.nextInt();
       Customer c = new Customer(name,ssn);
       c.Create_Moneyorder(moneyorder);
+      for(int i=0;i<c.random.size();i++)
+      {
+        System.out.println("From Customer random");
+        System.out.println(c.random.get(i));
+      }
       break;
 case "Merchant":
       System.out.println("Merchant option");
@@ -55,7 +81,6 @@ case "Exit":
 default:
       System.out.println("Enter correct option");
       break;
-}
 }
 }
 }
