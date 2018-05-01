@@ -44,8 +44,8 @@ while(random.contains(ID))
   ID=UniqueID();
 }
 Secret_Split();
-Bit_commit(i);
-order_req=ID+"::"+Integer.toString(orderval);
+String to_add=Bit_commit(i);
+order_req=ID+"::"+Integer.toString(orderval)+"::"+to_add;
 order_list.add(order_req);
 //System.out.println(order_req);
 random.add(ID);
@@ -89,9 +89,15 @@ leftarr.add(left);
 BigInteger right = secretsplit.xor(left);
 rightarr.add(right);
 }
-void Bit_commit(int to_commit)
+String Bit_commit(int to_commit)
 {
-System.out.println("Bit_commit");
+String to_sendmo="";
+BigInteger val1=leftarr.get(to_commit);
+BigInteger val2=rightarr.get(to_commit);
+String left_tocommit=(new String(val1.toByteArray()));
+String right_tocommit=(new String(val2.toByteArray()));
+to_sendmo=(left_tocommit.hashCode())+"::"+(right_tocommit.hashCode());
+return to_sendmo;
 }
 void printval()
 {
