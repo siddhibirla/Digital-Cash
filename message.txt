@@ -7,13 +7,14 @@ This Project Consists of 4 Classes
 4. Merchant
 
 Init
-
+-->Take inputs such as Name,SSN and the money order amount from the User.
 
 
 Customer
-
-
-
+-->It creates Random number of money orders.
+-->Secret splitting done to split Identity (name+SSN) into two parts
+-->Bit commitment to commit the hash values
+-->Blind the money orders using RSA.
 
 Bank
 
