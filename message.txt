@@ -17,7 +17,9 @@ Customer
 -->Blind the money orders using RSA.
 
 Bank
-
-
+--> Selects one random order to blindly sign.
+--> Signs this order using private key.
+--> Before Signing checks if all the other orders have the same money order amount.
+--> Writes all the unique ID's in the money order into a file.
 
 Merchant
