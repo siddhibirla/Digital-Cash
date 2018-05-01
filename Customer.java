@@ -14,7 +14,7 @@ import java.math.BigInteger;
 import javax.crypto.*;
 public class Customer
 {
-public static ArrayList<String> list = new ArrayList<>();
+public static ArrayList<byte[]> list = new ArrayList<>();
 public static ArrayList<String> random = new ArrayList<>();
 public static ArrayList<BigInteger> Sym_Key= new ArrayList<>();
 private static String Identity;
@@ -22,6 +22,7 @@ public static int random_orders;
 private static ArrayList<String> order_list = new ArrayList<>();
 private static ArrayList<BigInteger> rightarr = new ArrayList<>();
 private static ArrayList<BigInteger> leftarr = new ArrayList<>();
+private static BigInteger storekey;
 public static String UniqueID() // To create Unique ID
 {
   String s ="";
@@ -35,7 +36,7 @@ public static String UniqueID() // To create Unique ID
 }
 int Create_Moneyorder(int orderval)
 {
-for(int i=0;i<random_orders;i++)
+for(int i=0;i<random_orders+1;i++)
 {
 String order_req="";
 String ID=UniqueID();
@@ -50,7 +51,7 @@ order_list.add(order_req);
 //System.out.println(order_req);
 random.add(ID);
 }
-return random_orders;
+return (random_orders+1);
 }
 public void Blinding(BigInteger public_key1,BigInteger Mod) //RSA Blind signature
 {
@@ -68,15 +69,20 @@ k = BigInteger.probablePrime(bitlength,r);
 }
 Sym_Key.add(k);
 byte[] encrypted=(((new BigInteger(message)).multiply(k.modPow(public_key1,Mod))).toByteArray());
-String encryptedmessage=new String(encrypted);
-System.out.println(encryptedmessage);
-list.add(encryptedmessage);
+//String encryptedmessage=new String(encrypted);
+//System.out.println(encryptedmessage);
+list.add(encrypted);
 }
 //System.out.println(list.size());
 }
-void Unblindkey(int unblind_var)
+ArrayList<BigInteger> Unblindkey(int unblind_var)
 {
-  System.out.println(unblind_var);
+  storekey=Sym_Key.get(unblind_var);
+  String to_set="0";
+  byte[] toset = to_set.getBytes();
+  BigInteger b1= new BigInteger(toset);
+  Sym_Key.set(unblind_var,b1);
+  return Sym_Key;
 }
 void Secret_Split()
 {
@@ -89,14 +95,17 @@ leftarr.add(left);
 BigInteger right = secretsplit.xor(left);
 rightarr.add(right);
 }
-String Bit_commit(int to_commit)
+String Bit_commit(int to_commit) // To commit hashvalues
 {
 String to_sendmo="";
+for(int i=0;i<10;i++)
+{
 BigInteger val1=leftarr.get(to_commit);
 BigInteger val2=rightarr.get(to_commit);
 String left_tocommit=(new String(val1.toByteArray()));
 String right_tocommit=(new String(val2.toByteArray()));
-to_sendmo=(left_tocommit.hashCode())+"::"+(right_tocommit.hashCode());
+to_sendmo=to_sendmo+(left_tocommit.hashCode())+"::"+(right_tocommit.hashCode());
+}
 return to_sendmo;
 }
 void printval()
@@ -105,6 +114,10 @@ void printval()
   {
     System.out.println(order_list.get(i));
   }
+}
+public ArrayList<byte[]> get_Encrypted()
+{
+  return list;
 }
 public Customer(String name,int SSN)
 {

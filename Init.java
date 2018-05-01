@@ -92,9 +92,11 @@ case "Bank":
       Bank b = new Bank(total_orders,d);
       int z =b.to_selectorder();
       unblindvar=z;
-      c.Unblindkey(z);
-      c.printval();
-      System.out.println(z);
+      ArrayList<BigInteger> ar1= new ArrayList<>();
+      ar1=c.Unblindkey(z);
+      ArrayList<byte[]> ar2= new ArrayList<>();
+      ar2=c.get_Encrypted();
+      b.unblindingmoney(ar1,ar2,public_key,modulusn);
 case "Merchant":
       System.out.println("Merchant option selected");
       break;
