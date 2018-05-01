@@ -40,7 +40,7 @@ public int to_selectorder()
   }
   return to_send;
 }
-public void unblindingmoney(ArrayList<BigInteger> a1, ArrayList<byte[]> a2,BigInteger e1, BigInteger n1)
+public String unblindingmoney(ArrayList<BigInteger> a1, ArrayList<byte[]> a2,BigInteger e1, BigInteger n1)
 {
 for(int i=0;i<a1.size();i++)
 {
@@ -60,7 +60,12 @@ catch(Exception e)
 {
   System.out.println("Cant write ID to file");
 }
-money_check();
+boolean moc=money_check();
+if(moc==false)
+{
+return "Trying to Cheat the bank ";
+}
+return "Transaction is valid,all money orders are okay";
 }
 private void writing_id()throws IOException
 {
@@ -94,11 +99,13 @@ public void ID_check()
 {
   System.out.println("ID check and write to file");
 }
-public void money_check()
+public boolean money_check()
 {
  String filename1="ID_Mo.txt";
  String line1="";
  String line2="";
+ String to_checkarr[];
+ boolean f = true;
   try
   {
   FileReader filereader1 = new FileReader(filename1);
@@ -113,7 +120,24 @@ public void money_check()
   {
     System.out.println("File not found");
   }
-  System.out.println(line2);
+to_checkarr=line2.split("::");
+for(int i=1;i<to_checkarr.length;i=i+2)
+{
+  if(i!=((to_send*2)+1))
+  {
+   if(to_checkarr[i].equals(Integer.toString(money_order1)))
+   {
+     System.out.println(to_checkarr[i]+"="+Integer.toString(money_order1));
+     f=f;
+   }
+   else
+   {
+     f=false;
+     break;
+   }
+  }
+}
+return f;
 }
 public void Doublespendcheck()
 {

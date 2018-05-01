@@ -52,7 +52,7 @@ order_list.add(order_req);
 //System.out.println(order_req);
 random.add(ID);
 }
-return (random_orders+1);
+return (random_orders);
 }
 public void Blinding(BigInteger public_key1,BigInteger Mod) //RSA Blind signature
 {
@@ -124,7 +124,7 @@ public Customer(String name,int SSN)
 {
 Identity=name+Integer.toString(SSN);
 Random rand = new Random();
-random_orders=rand.nextInt(10);
+random_orders=(rand.nextInt(10)+2);
 }
 public Customer()
 {

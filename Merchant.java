@@ -33,6 +33,5 @@ public static String UniqueID1() // To create Unique ID
 public void challenge()
 {
 String to_challenge=UniqueID1();
-System.out.println(to_challenge);
 }
 }

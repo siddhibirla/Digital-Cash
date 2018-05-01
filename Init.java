@@ -98,7 +98,8 @@ case "Bank":
       ar1=c.Unblindkey(z);
       ArrayList<byte[]> ar2= new ArrayList<>();
       ar2=c.get_Encrypted();
-      b.unblindingmoney(ar1,ar2,public_key,modulusn);
+      String to_print=b.unblindingmoney(ar1,ar2,public_key,modulusn);
+      System.out.println(to_print);
       break;
 case "Merchant":
       System.out.println("Merchant option selected");
