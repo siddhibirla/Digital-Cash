@@ -20,6 +20,8 @@ public static ArrayList<BigInteger> Sym_Key= new ArrayList<>();
 private static String Identity;
 public static int random_orders;
 private static ArrayList<String> order_list = new ArrayList<>();
+private static ArrayList<BigInteger> rightarr = new ArrayList<>();
+private static ArrayList<BigInteger> leftarr = new ArrayList<>();
 public static String UniqueID() // To create Unique ID
 {
   String s ="";
@@ -41,7 +43,9 @@ while(random.contains(ID))
 {
   ID=UniqueID();
 }
-order_req=ID+" "+Integer.toString(orderval);
+Secret_Split();
+Bit_commit(i);
+order_req=ID+"::"+Integer.toString(orderval);
 order_list.add(order_req);
 //System.out.println(order_req);
 random.add(ID);
@@ -57,7 +61,11 @@ for(int i=0;i<order_list.size();i++)
 String m1=order_list.get(i);
 //System.out.println(order_list.size());
 byte[] message = m1.getBytes();
-BigInteger k = BigInteger.probablePrime(bitlength,r);
+BigInteger k = BigInteger.probablePrime(bitlength,r);// random keys being generated to encrypt message
+while(Sym_Key.contains(k))
+{
+k = BigInteger.probablePrime(bitlength,r);
+}
 Sym_Key.add(k);
 byte[] encrypted=(((new BigInteger(message)).multiply(k.modPow(public_key1,Mod))).toByteArray());
 String encryptedmessage=new String(encrypted);
@@ -72,11 +80,18 @@ void Unblindkey(int unblind_var)
 }
 void Secret_Split()
 {
-System.out.println("Secret_Split");
+Random r= new Random();
+int bitlength=1024;
+byte[] message1 = Identity.getBytes();
+BigInteger secretsplit = new BigInteger(message1);
+BigInteger left = BigInteger.probablePrime(bitlength,r);
+leftarr.add(left);
+BigInteger right = secretsplit.xor(left);
+rightarr.add(right);
 }
-void Bit_commit()
+void Bit_commit(int to_commit)
 {
-  System.out.println("Bitcommit");
+System.out.println("Bit_commit");
 }
 void printval()
 {

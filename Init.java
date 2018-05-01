@@ -42,6 +42,7 @@ String array3[] = line1.split("::");
 public_key = new BigInteger(array3[0]);
 modulusn = new BigInteger(array3[1]);
 phi= new BigInteger(array3[2]);
+BigInteger d =public_key.modInverse(phi);
 /*System.out.println(public_key);
 System.out.println(modulusn);
 System.out.println(phi);
@@ -88,7 +89,7 @@ case "Customer":
 case "Bank":
       int unblindvar=0;
       System.out.println("Bank option selected");
-      Bank b = new Bank(total_orders);
+      Bank b = new Bank(total_orders,d);
       int z =b.to_selectorder();
       unblindvar=z;
       c.Unblindkey(z);

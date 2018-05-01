@@ -15,9 +15,11 @@ import javax.crypto.*;
 public class Bank
 {
 public static int randomord;
-public Bank(int random_toselect)
+private static BigInteger privatekey;
+public Bank(int random_toselect, BigInteger pvkey)
 {
 randomord=random_toselect;
+privatekey=pvkey;
 }
 public int to_selectorder()
 {
