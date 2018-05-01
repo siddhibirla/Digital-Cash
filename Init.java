@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.KeyPair;
@@ -48,6 +49,7 @@ System.out.println(modulusn);
 System.out.println(phi);
 System.out.println(array3[0]);*/
 Customer c =new Customer();
+int moneyorder=0;
 while(t)
 {
 System.out.println("Select Option :");
@@ -81,7 +83,7 @@ case "Customer":
         ssn=sc.nextInt();
       }
       System.out.println("Enter the money order amount");
-      int moneyorder=sc.nextInt();
+      moneyorder=sc.nextInt();
       c= new Customer(name,ssn);
       total_orders=c.Create_Moneyorder(moneyorder);
       c.Blinding(public_key,modulusn);
@@ -89,7 +91,7 @@ case "Customer":
 case "Bank":
       int unblindvar=0;
       System.out.println("Bank option selected");
-      Bank b = new Bank(total_orders,d);
+      Bank b = new Bank(total_orders,d,moneyorder);
       int z =b.to_selectorder();
       unblindvar=z;
       ArrayList<BigInteger> ar1= new ArrayList<>();
@@ -97,8 +99,11 @@ case "Bank":
       ArrayList<byte[]> ar2= new ArrayList<>();
       ar2=c.get_Encrypted();
       b.unblindingmoney(ar1,ar2,public_key,modulusn);
+      break;
 case "Merchant":
       System.out.println("Merchant option selected");
+      Merchant m = new Merchant();
+      m.challenge();
       break;
 case "Exit":
       t=false;

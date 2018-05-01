@@ -11,15 +11,28 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
+import java.io.BufferedWriter;
 import javax.crypto.*;
 public class Merchant
 {
 public Merchant()
 {
-  System.out.println(new String(decrypted));
+  System.out.println("Merchant");
 }
-public challenge()
+public static String UniqueID1() // To create Unique ID
 {
-  System.out.println("Challenge");
+  String s ="";
+  Random r= new Random();
+  while(s.length()<10)
+  {
+    int r1= r.nextInt(2);
+    s=s+Integer.toString(r1);
+  }
+  return s;
+}
+public void challenge()
+{
+String to_challenge=UniqueID1();
+System.out.println(to_challenge);
 }
 }

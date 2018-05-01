@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.io.BufferedWriter;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -16,14 +17,18 @@ public class Bank
 {
 public static int randomord;
 private static BigInteger privatekey;
-public Bank(int random_toselect, BigInteger pvkey)
+public int to_send;
+private static ArrayList<String> decrypted_message= new ArrayList <>();
+private static int money_order1;
+public Bank(int random_toselect, BigInteger pvkey,int money_order)
 {
+money_order1=money_order;
 randomord=random_toselect;
 privatekey=pvkey;
 }
 public int to_selectorder()
 {
-  int to_send=0;
+  to_send=0;
   if(randomord!=0)
   {
   Random to_select = new Random();
@@ -41,11 +46,74 @@ for(int i=0;i<a1.size();i++)
 {
   BigInteger inverse=(a1.get(i)).modPow(e1,n1);
   byte[] decrypted = (((new BigInteger(a2.get(i))).divide(inverse)).toByteArray());
-  System.out.println("-------------------");
-  System.out.println(new String(decrypted));
-  System.out.println("-------------------");
-
+  //System.out.println("-------------------");//comment
+  String temp= new String(decrypted);
+  //System.out.println(temp);//comment
+//  System.out.println("-------------------");//comment
+  decrypted_message.add(temp);
 }
+try
+{
+writing_id();
+}
+catch(Exception e)
+{
+  System.out.println("Cant write ID to file");
+}
+money_check();
+}
+private void writing_id()throws IOException
+{
+  File file = new File("ID_Mo.txt");
+  file.createNewFile();
+  FileWriter writer = new FileWriter(file);
+  String to_write="";
+  System.out.println(to_send);
+  for(int i=0;i<decrypted_message.size();i++)
+  {
+  if(i==to_send)
+  {
+  to_write=to_write+"00N/A"+"::"+"00N/A"+"::";
+  }
+  else if(i==(decrypted_message.size()-1))
+  {
+    String to_write1[]=(decrypted_message.get(i)).split("::");
+    to_write=to_write+to_write1[0]+"::"+to_write1[1];
+  }
+  else
+  {
+  String to_write1[]=(decrypted_message.get(i)).split("::");
+  to_write=to_write+to_write1[0]+"::"+to_write1[1]+"::";
+  }
+  }
+  writer.write(to_write);
+  writer.flush();
+  writer.close();
+}
+public void ID_check()
+{
+  System.out.println("ID check and write to file");
+}
+public void money_check()
+{
+ String filename1="ID_Mo.txt";
+ String line1="";
+ String line2="";
+  try
+  {
+  FileReader filereader1 = new FileReader(filename1);
+  BufferedReader buff1 = new BufferedReader(filereader1);
+  while((line1=buff1.readLine())!=null)
+  {
+  line2=line2+line1;
+  }
+  buff1.close();
+  }
+  catch(Exception e)
+  {
+    System.out.println("File not found");
+  }
+  System.out.println(line2);
 }
 public void Doublespendcheck()
 {
