@@ -95,9 +95,45 @@ private void writing_id()throws IOException
   writer.flush();
   writer.close();
 }
-public void ID_check()
+public void Merchant_order()
 {
-  System.out.println("ID check and write to file");
+  System.out.println("Order from merchant");
+}
+public boolean ID_check(String idtocheck)
+{
+  String filename2="ID_Mo.txt";
+  String line1="";
+  String line2="";
+  String to_checkarr2[];
+  boolean to_merchant=true;
+  ArrayList<String> ID = new ArrayList<>();
+  try
+  {
+  FileReader filereader2 = new FileReader(filename2);
+  BufferedReader buff2 = new BufferedReader(filereader2);
+  while((line1=buff2.readLine())!=null)
+  {
+  line2=line2+line1;
+  }
+  buff2.close();
+  }
+  catch(Exception e)
+  {
+    System.out.println("File not found");
+  }
+  to_checkarr2=line2.split("::");
+  for(int i=0;i<to_checkarr2.length;i=i+2)
+  {
+    if(i!=((to_send*2)-1))
+    {
+    ID.add(to_checkarr2[i]);
+    }
+  }
+  if(ID.contains(idtocheck))
+  {
+    return false;
+  }
+  return to_merchant;
 }
 public boolean money_check()
 {
