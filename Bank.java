@@ -61,11 +61,11 @@ catch(Exception e)
   System.out.println("Cant write ID to file");
 }
 boolean moc=money_check();
-if(moc==false)
+if(moc==true)
 {
-return "Trying to Cheat the bank ";
-}
 return "Transaction is valid,all money orders are okay";
+}
+return "Trying to Cheat the bank ";
 }
 private void writing_id()throws IOException
 {
@@ -138,6 +138,10 @@ for(int i=1;i<to_checkarr.length;i=i+2)
   }
 }
 return f;
+}
+public void Signature()
+{
+  System.out.println("Signature");
 }
 public void Doublespendcheck()
 {

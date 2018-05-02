@@ -99,7 +99,17 @@ case "Bank":
       ArrayList<byte[]> ar2= new ArrayList<>();
       ar2=c.get_Encrypted();
       String to_print=b.unblindingmoney(ar1,ar2,public_key,modulusn);
-      System.out.println(to_print);
+      if(to_print.equals("Transaction is valid,all money orders are okay"))
+      {
+         System.out.println(to_print);
+         System.out.println("Bank is signing the money order");
+         b.Signature();
+      }
+      else
+      {
+        System.out.println(to_print);
+        System.out.println("Bank is cannot sign this money order");
+      }
       break;
 case "Merchant":
       System.out.println("Merchant option selected");
