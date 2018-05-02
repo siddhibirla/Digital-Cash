@@ -120,9 +120,13 @@ public ArrayList<byte[]> get_Encrypted()
 {
   return list;
 }
-public void Received_signedorder(String signed_ord)
+public void Received_signedorder(byte[] signed_ord)
 {
 System.out.println("Signed order");
+}
+public void sendordertomerchant()
+{
+  System.out.println("Send signed order to merchant");
 }
 public ArrayList<byte[]> challenge_merchant(String chal)
 {

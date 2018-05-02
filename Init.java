@@ -49,6 +49,7 @@ System.out.println(modulusn);
 System.out.println(phi);
 System.out.println(array3[0]);*/
 Customer c =new Customer();
+Bank b = new Bank();
 int moneyorder=0;
 while(t)
 {
@@ -91,7 +92,7 @@ case "Customer":
 case "Bank":
       int unblindvar=0;
       System.out.println("Bank option selected");
-      Bank b = new Bank(total_orders,d,moneyorder);
+      b = new Bank(total_orders,d,moneyorder);
       int z =b.to_selectorder();
       unblindvar=z;
       ArrayList<BigInteger> ar1= new ArrayList<>();
@@ -103,13 +104,13 @@ case "Bank":
       {
          System.out.println(to_print);
          System.out.println("Bank is signing the money order");
-         String temp1=b.Signature();
+         byte[] temp1=b.Signature();
          c.Received_signedorder(temp1);
       }
       else
       {
         System.out.println(to_print);
-        System.out.println("Bank is cannot sign this money order");
+        System.out.println("Bank cannot sign this money order");
       }
       break;
 case "Merchant":
@@ -118,6 +119,7 @@ case "Merchant":
       String cstr=m.challenge();
       ArrayList<byte[]> temp_1=new ArrayList<>();
       temp_1=c.challenge_merchant(cstr);
+      boolean testing = m.tocheckhash(temp_1);
       break;
 case "Exit":
       t=false;
