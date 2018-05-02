@@ -22,6 +22,7 @@ private static ArrayList<String> decrypted_message= new ArrayList <>();
 private static int money_order1;
 private static BigInteger publickey_bank;
 private static BigInteger modulus_bank;
+private static byte[] temp_bankstore;
 public Bank(int random_toselect, BigInteger pvkey,int money_order)
 {
 money_order1=money_order;
@@ -44,8 +45,9 @@ public int to_selectorder()
 }
 public String unblindingmoney(ArrayList<BigInteger> a1, ArrayList<byte[]> a2,BigInteger e1, BigInteger n1)
 {
-modulus_bank=n1;
 publickey_bank=e1;
+modulus_bank=n1;
+temp_bankstore=a2.get(to_send);
 for(int i=0;i<a1.size();i++)
 {
   if(i!=to_send)
@@ -188,11 +190,10 @@ return f;
 }
 public byte[] Signature()
 {
-String to_sign=decrypted_message.get(to_send);
-byte[] temp_message2 = to_sign.getBytes();
-byte[] signed_message=((((new BigInteger(temp_message2)).modPow(privatekey,modulus_bank))).toByteArray());
-System.out.println(temp_message2);
-System.out.println(signed_message);
+//String to_sign1=to_sign;//"::"+to_sign.hashCode();
+System.out.println("Bank");
+System.out.println(temp_bankstore);
+byte[] signed_message=((((new BigInteger(temp_bankstore)).modPow(privatekey,modulus_bank))).toByteArray());
 return signed_message;
 }
 public void Doublespendcheck()

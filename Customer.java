@@ -120,9 +120,12 @@ public ArrayList<byte[]> get_Encrypted()
 {
   return list;
 }
-public void Received_signedorder(byte[] signed_ord)
+public void Received_signedorder(byte[] signed_ord,BigInteger public_key1,BigInteger Mod)
 {
-System.out.println("Signed order");
+BigInteger inv=storekey.modInverse(Mod);
+byte[] decrypted_c = (((new BigInteger(signed_ord)).multiply(inv)).toByteArray());
+byte[] decrypted1_c=((((new BigInteger(decrypted_c)).modPow(public_key1,Mod))).toByteArray());
+System.out.println(new String(decrypted1_c));
 }
 public void sendordertomerchant()
 {
