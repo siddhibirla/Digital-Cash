@@ -116,7 +116,8 @@ case "Merchant":
       System.out.println("Merchant option selected");
       Merchant m = new Merchant();
       String cstr=m.challenge();
-      c.challenge_merchant(cstr);
+      ArrayList<byte[]> temp_1=new ArrayList<>();
+      temp_1=c.challenge_merchant(cstr);
       break;
 case "Exit":
       t=false;

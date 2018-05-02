@@ -122,11 +122,25 @@ public ArrayList<byte[]> get_Encrypted()
 }
 public void Received_signedorder(String signed_ord)
 {
-  System.out.println(signed_ord);
+System.out.println("Signed order");
 }
-public void challenge_merchant(String chal)
+public ArrayList<byte[]> challenge_merchant(String chal)
 {
-  System.out.println(chal);
+  ArrayList<byte[]> byte_array=new ArrayList<>();
+  for(int i=0;i<chal.length();i++)
+  {
+    char c=chal.charAt(i);
+    int index = c-'0';
+    if(index==0)
+    {
+    byte_array.add(((leftarr.get(i)).toByteArray()));
+    }
+    else
+    {
+    byte_array.add(((rightarr.get(i)).toByteArray()));
+    }
+  }
+  return byte_array;
 }
 public Customer(String name,int SSN)
 {
