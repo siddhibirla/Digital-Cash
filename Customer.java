@@ -120,6 +120,14 @@ public ArrayList<byte[]> get_Encrypted()
 {
   return list;
 }
+public void Received_signedorder(String signed_ord)
+{
+  System.out.println(signed_ord);
+}
+public void challenge_merchant(String chal)
+{
+  System.out.println(chal);
+}
 public Customer(String name,int SSN)
 {
 Identity=name+Integer.toString(SSN);

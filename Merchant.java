@@ -30,8 +30,9 @@ public static String UniqueID1() // To create Unique ID
   }
   return s;
 }
-public void challenge()
+public String challenge()
 {
 String to_challenge=UniqueID1();
+return to_challenge;
 }
 }

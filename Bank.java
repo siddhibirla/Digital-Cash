@@ -44,6 +44,8 @@ public String unblindingmoney(ArrayList<BigInteger> a1, ArrayList<byte[]> a2,Big
 {
 for(int i=0;i<a1.size();i++)
 {
+  if(i!=to_send)
+  {
   BigInteger inverse=(a1.get(i)).modPow(e1,n1);
   byte[] decrypted = (((new BigInteger(a2.get(i))).divide(inverse)).toByteArray());
   //System.out.println("-------------------");//comment
@@ -51,6 +53,11 @@ for(int i=0;i<a1.size();i++)
   //System.out.println(temp);//comment
 //  System.out.println("-------------------");//comment
   decrypted_message.add(temp);
+}
+else
+{
+  decrypted_message.add(new String(a2.get(i)));
+}
 }
 try
 {
@@ -175,9 +182,11 @@ for(int i=1;i<to_checkarr.length;i=i+2)
 }
 return f;
 }
-public void Signature()
+public String Signature()
 {
-  System.out.println("Signature");
+String send_customer="";
+System.out.println(decrypted_message.get(to_send));
+return send_customer;
 }
 public void Doublespendcheck()
 {

@@ -103,7 +103,8 @@ case "Bank":
       {
          System.out.println(to_print);
          System.out.println("Bank is signing the money order");
-         b.Signature();
+         String temp1=b.Signature();
+         c.Received_signedorder(temp1);
       }
       else
       {
@@ -114,7 +115,8 @@ case "Bank":
 case "Merchant":
       System.out.println("Merchant option selected");
       Merchant m = new Merchant();
-      m.challenge();
+      String cstr=m.challenge();
+      c.challenge_merchant(cstr);
       break;
 case "Exit":
       t=false;
