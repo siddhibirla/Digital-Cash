@@ -23,6 +23,7 @@ private static int money_order1;
 private static BigInteger publickey_bank;
 private static BigInteger modulus_bank;
 private static byte[] temp_bankstore;
+private static ArrayList<String> ID = new ArrayList<>();
 public Bank(int random_toselect, BigInteger pvkey,int money_order)
 {
 money_order1=money_order;
@@ -35,7 +36,10 @@ public int to_selectorder()
   if(randomord!=0)
   {
   Random to_select = new Random();
-  to_send = to_select.nextInt(randomord); // Limit values to total number of orders
+  int Max=randomord-1;
+  int Min=0;
+//  to_send = to_select.nextInt(randomord); // Limit values to total number of orders
+  to_send= Min + to_select.nextInt(Max - Min + 1);
   }
   else
   {
@@ -56,7 +60,7 @@ for(int i=0;i<a1.size();i++)
   byte[] decrypted = (((new BigInteger(a2.get(i))).divide(inverse)).toByteArray());
   //System.out.println("-------------------");//comment
   String temp= new String(decrypted);
-  //System.out.println(temp);//comment
+//  System.out.println(temp);//comment
 //  System.out.println("-------------------");//comment
   decrypted_message.add(temp);
 }
@@ -118,8 +122,9 @@ public boolean ID_check(String idtocheck)
   String line1="";
   String line2="";
   String to_checkarr2[];
+  String array_split[]=idtocheck.split("::");
+  String IDtocheck_here=array_split[0];
   boolean to_merchant=true;
-  ArrayList<String> ID = new ArrayList<>();
   try
   {
   FileReader filereader2 = new FileReader(filename2);
@@ -140,9 +145,10 @@ public boolean ID_check(String idtocheck)
     if(i!=((to_send*2)-1))
     {
     ID.add(to_checkarr2[i]);
+    System.out.println("here here here");
     }
   }
-  if(ID.contains(idtocheck))
+  if(ID.contains(IDtocheck_here))
   {
     return false;
   }
@@ -198,9 +204,20 @@ System.out.println(temp_bankstore);
 byte[] signed_message=((((new BigInteger(temp_bankstore)).modPow(privatekey,modulus_bank))).toByteArray());
 return signed_message;
 }
-public void Doublespendcheck()
+public void Doublespendcheck(String IDcheckmess)
 {
-  System.out.println("Check");
+/*String array_split[]=IDcheckmess.split("::");
+String IDtocheck_here=array_split[0];
+System.out.println(IDtocheck_here);
+for(int i=0;i<ID.size();i++)
+{
+  System.out.println(ID.get(i));
+}
+if(ID.contains(IDtocheck_here))
+{
+  return false;
+}
+return true;*/
 }
 public Bank()
 {

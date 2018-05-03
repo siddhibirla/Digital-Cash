@@ -60,7 +60,7 @@ return (random_orders);
 public void Blinding(BigInteger public_key1,BigInteger Mod) //RSA Blind signature
 {
 Random r = new Random();
-int bitlength=1024;
+int bitlength=512;
 for(int i=0;i<order_list.size();i++)
 {
 String m1=order_list.get(i);
@@ -163,7 +163,9 @@ public Customer(String name,int SSN)
 {
 Identity=name+Integer.toString(SSN);
 Random rand = new Random();
-random_orders=(rand.nextInt(10)+2);
+int Min=5;
+int Max=12;
+random_orders= Min + rand.nextInt(Max - Min + 1);
 }
 public Customer()
 {

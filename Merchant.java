@@ -48,23 +48,42 @@ public boolean tocheckhash(ArrayList<byte[]> temp_2)
   boolean c_temp = true;
   temp_tobank=temp_2;
   String array1[]=decrypting_temp1.split("::");
-  ArrayList<String> left_temp=new ArrayList<>();
-  ArrayList<String> right_temp=new ArrayList<>();
-  for(int i=2;i<array1.length;i++)
+  ArrayList<String> temp_inmerch=new ArrayList<>();
+  int j=2;
+  int k=3;
+  for(int i=0;i<challenge_tosendbank.length();i++)
   {
-  if(i%2==0)
+  //  System.out.println("---------------------------");
+  //  System.out.println(challenge_tosendbank.length());
+  //  System.out.println(array1.length);
+  //  System.out.println(j);
+  //  System.out.println(k);
+  //  System.out.println("---------------------------");
+    char i1=challenge_tosendbank.charAt(i);
+    int index_challenge=i1-'0';
+    if(index_challenge==0)
+    {
+      temp_inmerch.add(array1[j]);
+    }
+    else
+    {
+      temp_inmerch.add(array1[k]);
+    }
+    j=j+2;
+    k=k+2;
+  }
+  for(int i=0;i<temp_inmerch.size();i++)
   {
-    left_temp.add(array1[i]);
+  String hash_test = new String(temp_2.get(i));
+  String hash_test1=Integer.toString(hash_test.hashCode());
+  if(hash_test1.equals(temp_inmerch.get(i)))
+  {
+  c_temp=c_temp;
   }
   else
   {
-    right_temp.add(array1[i]);
+    return false;
   }
-  }
-  for(int i=0;i<left_temp.size();i++)
-  {
-    System.out.println(left_temp.get(i));
-    System.out.println(right_temp.get(i));
   }
   return c_temp;
 }
@@ -76,6 +95,7 @@ String to_checkhash=(new String(decrypted1_c));
 decrypting_temp1=to_checkhash;
 //System.out.println(decrypting_temp1);
 //System.out.println(new String(decrypted1_c));
-return "Cannot Send order to bank, Hashes not correct";
+//System.out.println(to_checkhash);
+return to_checkhash;
 }
 }
