@@ -121,12 +121,23 @@ case "Merchant":
       String m2_temp=m.received_orderfromCustomer(temp_5,public_key,modulusn);
       ArrayList<byte[]> temp_4=new ArrayList<>();
       temp_4=c.challenge_merchant(cstr);
-      boolean testing = m.tocheckhash(temp_4);
+      boolean testing=true;
+      try
+      {
+      testing = m.tocheckhash(temp_4);
+      }
+      catch(Exception e)
+      {
+        System.out.println("Try Again");
+      }
       System.out.println(testing);
       if(testing)
       {
         System.out.println("Identity bits valid, hash is valid, will send order to bank");
         boolean r = b.ID_check(m2_temp);
+        String t2=m.send_chalb();
+        String t3="";
+        b.Store_iden(t2,temp_4);
         if(r)
         {
           System.out.println("Merchant-Bank Transaction Approved");
@@ -134,7 +145,8 @@ case "Merchant":
         else
         {
             System.out.println("CHEATING!!! WILL PUBLISH IDENTITY OF CUSTOMER");
-            b.Reveal_Identity();
+            String finalresult=b.Reveal_Identity();
+            System.out.println(finalresult);
         }
       }
       else

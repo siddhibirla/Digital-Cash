@@ -43,7 +43,7 @@ public void tosendm_back()
 {
   System.out.println("to send to the bank");
 }
-public boolean tocheckhash(ArrayList<byte[]> temp_2)
+public boolean tocheckhash(ArrayList<byte[]> temp_2)throws IOException
 {
   boolean c_temp = true;
   temp_tobank=temp_2;
@@ -86,6 +86,10 @@ public boolean tocheckhash(ArrayList<byte[]> temp_2)
   }
   }
   return c_temp;
+}
+public String send_chalb()
+{
+return challenge_tosendbank;
 }
 public String received_orderfromCustomer(byte[] received,BigInteger public_key1,BigInteger Mod)
 {

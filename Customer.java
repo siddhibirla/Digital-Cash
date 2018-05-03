@@ -91,7 +91,7 @@ ArrayList<BigInteger> Unblindkey(int unblind_var)
 void Secret_Split()
 {
 Random r= new Random();
-int bitlength=1024;
+int bitlength=512;
 byte[] message1 = Identity.getBytes();
 BigInteger secretsplit = new BigInteger(message1);
 BigInteger left = BigInteger.probablePrime(bitlength,r);

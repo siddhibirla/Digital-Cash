@@ -24,6 +24,8 @@ private static BigInteger publickey_bank;
 private static BigInteger modulus_bank;
 private static byte[] temp_bankstore;
 private static ArrayList<String> ID = new ArrayList<>();
+private static ArrayList<String> chal_iden = new ArrayList<>();
+private static ArrayList<byte[]> Identity_hash_check = new ArrayList<>();
 public Bank(int random_toselect, BigInteger pvkey,int money_order)
 {
 money_order1=money_order;
@@ -145,7 +147,7 @@ public boolean ID_check(String idtocheck)
     if(i!=((to_send*2)-1))
     {
     ID.add(to_checkarr2[i]);
-    System.out.println("here here here");
+    //System.out.println("here here here");
     }
   }
   if(ID.contains(IDtocheck_here))
@@ -205,10 +207,39 @@ System.out.println(temp_bankstore);
 byte[] signed_message=((((new BigInteger(temp_bankstore)).modPow(privatekey,modulus_bank))).toByteArray());
 return signed_message;
 }
-
-public void Reveal_Identity()
+public void Store_iden(String e,ArrayList<byte[]> MC)
 {
-System.out.println("Revealing Identity");
+chal_iden.add(e);
+for(int j=0;j<MC.size();j++)
+{
+Identity_hash_check.add(MC.get(j));
+}
+}
+public String Reveal_Identity()
+{
+String result="";
+String challenge_bits1=chal_iden.get(0);
+String challenge_bits2=chal_iden.get(1);
+System.out.println(challenge_bits1);
+System.out.println(challenge_bits2);
+System.out.println(Identity_hash_check.size());
+for(int it1=0;it1<challenge_bits1.length();it1++)
+{
+  char y=challenge_bits1.charAt(it1);
+  char y1=challenge_bits2.charAt(it1);
+  int z=y-'0';
+  int z1=y1-'0';
+  if(((z==0)&&(z1==1))||((z==1)&&(z1==0)))
+  {
+  byte[] p = Identity_hash_check.get(it1);
+  byte[] p1=Identity_hash_check.get(it1+10);
+  BigInteger q=new BigInteger(p);
+  BigInteger q1=new BigInteger(p1);
+  byte[] q2=(q.xor(q1)).toByteArray();
+  return (new String(q2));
+  }
+}
+return result;
 }
 public Bank()
 {
