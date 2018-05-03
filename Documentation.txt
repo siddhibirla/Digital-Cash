@@ -23,3 +23,9 @@ Bank
 --> Writes all the unique ID's in the money order into a file.
 
 Merchant
+--> Gets the decrypted signed message from the Customer
+--> Customer verifies the Signature of the Bank and decrypts the message using the public key of the Bank
+--> Sends a radom challenge bit string to the Customer
+--> Customer sends the left(R) or right(S) values corresponding to the Challenge bits. ((R)xor(name+SSN)=(S))
+Customer sends R for 0 challenge bit and S for 1 challenge bit
+--> Merchant verfies the hash value and sends the order to the bank
