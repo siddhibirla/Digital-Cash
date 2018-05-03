@@ -152,6 +152,7 @@ public boolean ID_check(String idtocheck)
   {
     return false;
   }
+  ID.add(IDtocheck_here);
   return to_merchant;
 }
 public boolean money_check()
@@ -204,20 +205,10 @@ System.out.println(temp_bankstore);
 byte[] signed_message=((((new BigInteger(temp_bankstore)).modPow(privatekey,modulus_bank))).toByteArray());
 return signed_message;
 }
-public void Doublespendcheck(String IDcheckmess)
+
+public void Reveal_Identity()
 {
-/*String array_split[]=IDcheckmess.split("::");
-String IDtocheck_here=array_split[0];
-System.out.println(IDtocheck_here);
-for(int i=0;i<ID.size();i++)
-{
-  System.out.println(ID.get(i));
-}
-if(ID.contains(IDtocheck_here))
-{
-  return false;
-}
-return true;*/
+System.out.println("Revealing Identity");
 }
 public Bank()
 {

@@ -121,8 +121,7 @@ case "Merchant":
       String m2_temp=m.received_orderfromCustomer(temp_5,public_key,modulusn);
       ArrayList<byte[]> temp_4=new ArrayList<>();
       temp_4=c.challenge_merchant(cstr);
-      boolean testing = true;
-      //m.tocheckhash(temp_4);
+      boolean testing = m.tocheckhash(temp_4);
       System.out.println(testing);
       if(testing)
       {
@@ -135,6 +134,7 @@ case "Merchant":
         else
         {
             System.out.println("CHEATING!!! WILL PUBLISH IDENTITY OF CUSTOMER");
+            b.Reveal_Identity();
         }
       }
       else
