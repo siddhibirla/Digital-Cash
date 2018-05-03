@@ -24,6 +24,7 @@ private static ArrayList<String> order_list = new ArrayList<>();
 private static ArrayList<BigInteger> rightarr = new ArrayList<>();
 private static ArrayList<BigInteger> leftarr = new ArrayList<>();
 private static BigInteger storekey;
+private static byte[] send_bytemerchant;
 public static String UniqueID() // To create Unique ID
 {
   String s ="";
@@ -37,7 +38,11 @@ public static String UniqueID() // To create Unique ID
 }
 int Create_Moneyorder(int orderval)
 {
-for(int i=0;i<random_orders+1;i++)
+for(int i=0;i<10;i++)
+{
+  Secret_Split();
+}
+for(int i=0;i<random_orders;i++)
 {
 String order_req="";
 String ID=UniqueID();
@@ -45,11 +50,9 @@ while(random.contains(ID))
 {
   ID=UniqueID();
 }
-Secret_Split();
-String to_add=Bit_commit(i);
+String to_add=Bit_commit();
 order_req=ID+"::"+Integer.toString(orderval)+"::"+to_add;
 order_list.add(order_req);
-//System.out.println(order_req);
 random.add(ID);
 }
 return (random_orders);
@@ -96,16 +99,23 @@ leftarr.add(left);
 BigInteger right = secretsplit.xor(left);
 rightarr.add(right);
 }
-String Bit_commit(int to_commit) // To commit hashvalues
+String Bit_commit() // To commit hashvalues
 {
 String to_sendmo="";
 for(int i=0;i<10;i++)
 {
-BigInteger val1=leftarr.get(to_commit);
-BigInteger val2=rightarr.get(to_commit);
+BigInteger val1=leftarr.get(i);
+BigInteger val2=rightarr.get(i);
 String left_tocommit=(new String(val1.toByteArray()));
 String right_tocommit=(new String(val2.toByteArray()));
-to_sendmo=to_sendmo+(left_tocommit.hashCode())+"::"+(right_tocommit.hashCode());
+if(i!=9)
+{
+to_sendmo=to_sendmo+(left_tocommit.hashCode())+"::"+(right_tocommit.hashCode())+"::";
+}
+else
+{
+  to_sendmo=to_sendmo+(left_tocommit.hashCode())+"::"+(right_tocommit.hashCode());
+}
 }
 return to_sendmo;
 }
@@ -124,12 +134,12 @@ public void Received_signedorder(byte[] signed_ord,BigInteger public_key1,BigInt
 {
 BigInteger inv=storekey.modInverse(Mod);
 byte[] decrypted_c = (((new BigInteger(signed_ord)).multiply(inv)).toByteArray());
-byte[] decrypted1_c=((((new BigInteger(decrypted_c)).modPow(public_key1,Mod))).toByteArray());
-System.out.println(new String(decrypted1_c));
+//byte[] decrypted1_c=((((new BigInteger(decrypted_c)).modPow(public_key1,Mod))).toByteArray());
+send_bytemerchant=decrypted_c;
 }
-public void sendordertomerchant()
+public byte[] sendordertomerchant()
 {
-  System.out.println("Send signed order to merchant");
+return send_bytemerchant;
 }
 public ArrayList<byte[]> challenge_merchant(String chal)
 {

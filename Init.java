@@ -117,9 +117,11 @@ case "Merchant":
       System.out.println("Merchant option selected");
       Merchant m = new Merchant();
       String cstr=m.challenge();
-      ArrayList<byte[]> temp_1=new ArrayList<>();
-      temp_1=c.challenge_merchant(cstr);
-      boolean testing = m.tocheckhash(temp_1);
+      byte[] temp_5=c.sendordertomerchant();
+      String m2_temp=m.received_orderfromCustomer(temp_5,public_key,modulusn);
+      ArrayList<byte[]> temp_4=new ArrayList<>();
+      temp_4=c.challenge_merchant(cstr);
+      boolean testing = m.tocheckhash(temp_4);
       break;
 case "Exit":
       t=false;

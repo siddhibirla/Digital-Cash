@@ -17,7 +17,7 @@ public class Bank
 {
 public static int randomord;
 private static BigInteger privatekey;
-public int to_send;
+public static int to_send;
 private static ArrayList<String> decrypted_message= new ArrayList <>();
 private static int money_order1;
 private static BigInteger publickey_bank;
@@ -190,8 +190,10 @@ return f;
 }
 public byte[] Signature()
 {
+//String to_sign=decrypted_message.get(to_send);
 //String to_sign1=to_sign;//"::"+to_sign.hashCode();
 System.out.println("Bank");
+//byte[] temp_message2 = to_sign1.getBytes();
 System.out.println(temp_bankstore);
 byte[] signed_message=((((new BigInteger(temp_bankstore)).modPow(privatekey,modulus_bank))).toByteArray());
 return signed_message;

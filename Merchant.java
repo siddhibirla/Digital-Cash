@@ -16,6 +16,7 @@ import javax.crypto.*;
 public class Merchant
 {
 public static String challenge_tosendbank;
+public static String decrypting_temp1;
 private static ArrayList<byte[]> temp_tobank = new ArrayList<>();
 public Merchant()
 {
@@ -44,13 +45,37 @@ public void tosendm_back()
 }
 public boolean tocheckhash(ArrayList<byte[]> temp_2)
 {
-  boolean c = true;
+  boolean c_temp = true;
   temp_tobank=temp_2;
-  System.out.println("to check hash");
-  return c;
+  String array1[]=decrypting_temp1.split("::");
+  ArrayList<String> left_temp=new ArrayList<>();
+  ArrayList<String> right_temp=new ArrayList<>();
+  for(int i=2;i<array1.length;i++)
+  {
+  if(i%2==0)
+  {
+    left_temp.add(array1[i]);
+  }
+  else
+  {
+    right_temp.add(array1[i]);
+  }
+  }
+  for(int i=0;i<left_temp.size();i++)
+  {
+    System.out.println(left_temp.get(i));
+    System.out.println(right_temp.get(i));
+  }
+  return c_temp;
 }
-public void receive_orderfromCustomer()
+public String received_orderfromCustomer(byte[] received,BigInteger public_key1,BigInteger Mod)
 {
-  System.out.println("received order from customer");
+String confirmation="";
+byte[] decrypted1_c=((((new BigInteger(received)).modPow(public_key1,Mod))).toByteArray());
+String to_checkhash=(new String(decrypted1_c));
+decrypting_temp1=to_checkhash;
+//System.out.println(decrypting_temp1);
+//System.out.println(new String(decrypted1_c));
+return "Cannot Send order to bank, Hashes not correct";
 }
 }
