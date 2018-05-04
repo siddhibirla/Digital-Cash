@@ -1,5 +1,9 @@
 #Digital Cash Project
 #Documentation
+
+An electronic cash system, in which digital cash cannot be copied or reused more than
+once and the privacy of the customer’s identity is guaranteed.
+
 This Project Consists of 4 Classes
 1. Init
 2. Customer
