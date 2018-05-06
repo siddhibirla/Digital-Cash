@@ -1,0 +1,33 @@
+#User Manual
+
+
+
+Init Class
+--> Displays Customer,Merchant,Bank or Exit option
+--> Select any one of the option, A wrong selection will display a message saying "Enter valid option"
+--> Selecting Customer option will ask for a name,9 digit SSN and Money order amount.
+--> "Invlid name/SSN" will be displayed if the SSN is less than 9 digits. 
+
+
+
+
+Customer Class
+
+
+
+
+
+
+
+
+Bank Class
+
+
+
+
+
+
+
+
+
+Merchant Class
