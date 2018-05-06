@@ -33,7 +33,7 @@ public static String UniqueID1() // To create Unique ID
   }
   return s;
 }
-public String challenge()
+public String challenge()// Creating challenge bit string
 {
 String to_challenge=UniqueID1();
 challenge_tosendbank=to_challenge;
@@ -91,7 +91,7 @@ public String send_chalb()
 {
 return challenge_tosendbank;
 }
-public String received_orderfromCustomer(byte[] received,BigInteger public_key1,BigInteger Mod)
+public String received_orderfromCustomer(byte[] received,BigInteger public_key1,BigInteger Mod)// Checking for bank signature
 {
 String confirmation="";
 byte[] decrypted1_c=((((new BigInteger(received)).modPow(public_key1,Mod))).toByteArray());
