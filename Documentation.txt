@@ -12,7 +12,8 @@ This Project Consists of 4 Classes
 
 Init
 -->Take inputs such as Name,SSN and the money order amount from the User.
-
+-->Provides options to the User to Select
+-->The User can select either the Customer,Bank,Merchant option or Exit using the Exit option.
 
 Customer
 -->It creates Random number of money orders.
