@@ -74,7 +74,7 @@ case "Customer":
           String ssn1=Integer.toString(ssn);
           if(ssn1.length()<9)
           {
-          String error="Less than 9 digits in SSN";
+          String error="Less than 9 digits in SSN"; 
           throw new Exception();
           }
       }
@@ -133,7 +133,7 @@ case "Merchant":
       System.out.println(testing);
       if(testing)
       {
-        System.out.println("Identity bits valid, hash is valid, will send order to bank");
+        System.out.println("Identity bits valid, hash is valid, will send order to bank"); // Transaction approved case
         boolean r = b.ID_check(m2_temp);
         String t2=m.send_chalb();
         String t3="";
@@ -144,7 +144,7 @@ case "Merchant":
         }
         else
         {
-            System.out.println("CHEATING!!! WILL PUBLISH IDENTITY OF CUSTOMER");
+            System.out.println("CHEATING!!! WILL PUBLISH IDENTITY OF CUSTOMER"); // double spending case
             String finalresult=b.Reveal_Identity();
             System.out.println(finalresult);
         }
