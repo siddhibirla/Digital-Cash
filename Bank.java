@@ -32,7 +32,7 @@ money_order1=money_order;
 randomord=random_toselect;
 privatekey=pvkey;
 }
-public int to_selectorder()
+public int to_selectorder() // Selecting random order to sign blindly
 {
   to_send=0;
   if(randomord!=0)
@@ -118,7 +118,7 @@ public void Merchant_order()
 {
   System.out.println("Order from merchant");
 }
-public boolean ID_check(String idtocheck)
+public boolean ID_check(String idtocheck) // To check if all IDs are Unique
 {
   String filename2="ID_Mo.txt";
   String line1="";
@@ -197,7 +197,7 @@ for(int i=1;i<to_checkarr.length;i=i+2)
 }
 return f;
 }
-public byte[] Signature()
+public byte[] Signature()//Blind Signature
 {
 //String to_sign=decrypted_message.get(to_send);
 //String to_sign1=to_sign;//"::"+to_sign.hashCode();
@@ -215,7 +215,7 @@ for(int j=0;j<MC.size();j++)
 Identity_hash_check.add(MC.get(j));
 }
 }
-public String Reveal_Identity()
+public String Reveal_Identity() // To reveal identity of Customer in case of double spending
 {
 String result="";
 String challenge_bits1=chal_iden.get(0);
