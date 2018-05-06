@@ -51,7 +51,7 @@ while(random.contains(ID))
   ID=UniqueID();
 }
 String to_add=Bit_commit();
-order_req=ID+"::"+Integer.toString(orderval)+"::"+to_add;
+order_req=ID+"::"+Integer.toString(orderval)+"::"+to_add; // Unencrypted Money order
 order_list.add(order_req);
 random.add(ID);
 }
@@ -141,7 +141,7 @@ public byte[] sendordertomerchant()
 {
 return send_bytemerchant;
 }
-public ArrayList<byte[]> challenge_merchant(String chal)
+public ArrayList<byte[]> challenge_merchant(String chal)// Send respective R and S values corresponding to challenge bits
 {
   ArrayList<byte[]> byte_array=new ArrayList<>();
   for(int i=0;i<chal.length();i++)
