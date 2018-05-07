@@ -12,22 +12,30 @@ Init Class
 
 
 Customer Class
-
-
-
-
-
+This class has the following methods:
+-->public static String UniqueID();
+-->int Create_Moneyorder(int orderval);
+-->public void Blinding(BigInteger public_key1,BigInteger Mod) ;
+-->ArrayList<BigInteger> Unblindkey(int unblind_var);
+-->void Secret_Split();
+-->String Bit_commit();
+-->public ArrayList<byte[]> get_Encrypted();
+-->public ArrayList<byte[]> challenge_merchant(String chal);
 
 
 
 Bank Class
-
-
-
-
-
-
-
+This class contains the following methods:
+-->public int to_selectorder();
+-->public String unblindingmoney(ArrayList<BigInteger> a1, ArrayList<byte[]> a2,BigInteger e1, BigInteger n1);
+-->private void writing_id()throws IOException;
+-->public boolean ID_check(String idtocheck);
+-->public boolean money_check();
+-->public byte[] Signature();
+-->public String Reveal_Identity();
 
 
 Merchant Class
+-->public String challenge();
+-->public boolean tocheckhash(ArrayList<byte[]> temp_2)throws IOException;
+-->public String received_orderfromCustomer(byte[] received,BigInteger public_key1,BigInteger Mod);
