@@ -1,6 +1,8 @@
 #User Manual
 
-
+The code is written in Java 8. Download the files and run the Init Class on terminal using the following commands:
+1. javac Init.java
+2. java Init
 
 Init Class
 --> Displays Customer,Merchant,Bank or Exit option
@@ -14,8 +16,20 @@ Init Class
 Customer Class
 This class has the following methods:
 -->public static String UniqueID();
+   This method can be called to obtain a Unique ID to be used in a money order.
+   
 -->int Create_Moneyorder(int orderval);
+   This method takes a integer value as parameter and returns the total number of money orders created.
+   ex. int x = 10;
+       int z = Create_Moneyorder(x);
+       System.out.println(z); // Returns the total number of money orders created
+       
+   
 -->public void Blinding(BigInteger public_key1,BigInteger Mod) ;
+   This method takes two BigIntger parameters as inputs which represent the public key and Modulus to encrypt the data.
+   Used to blind the money orders using the RSA public key and Random key K1,K2,...Kn created for uniquely for each message.
+   
+   
 -->ArrayList<BigInteger> Unblindkey(int unblind_var);
 -->void Secret_Split();
 -->String Bit_commit();
