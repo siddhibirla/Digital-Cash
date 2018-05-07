@@ -11,10 +11,9 @@ Init Class
 --> "Invlid name/SSN" will be displayed if the SSN is less than 9 digits. 
 
 
-
-
 Customer Class
 This class has the following methods:
+
 -->public static String UniqueID();
    This method can be called to obtain a Unique ID to be used in a money order.
    
@@ -28,28 +27,77 @@ This class has the following methods:
 -->public void Blinding(BigInteger public_key1,BigInteger Mod) ;
    This method takes two BigIntger parameters as inputs which represent the public key and Modulus to encrypt the data.
    Used to blind the money orders using the RSA public key and Random key K1,K2,...Kn created for uniquely for each message.
+   This method also stores the values of all the random keys created in an Arraylist.
    
    
 -->ArrayList<BigInteger> Unblindkey(int unblind_var);
+   Sends all the Random key to the bank except 
+   
 -->void Secret_Split();
+   This method when called splits the money order into two halves. This is used to create Identity bits for the money order.
+   (Random bit string(R)) xor (Secret Identity String) = S
+   (I0) xor (Secret Identity String) = (I0')
+   
 -->String Bit_commit();
+   This method selects the bitstrings to commit while sending it to the bank. 
+   
 -->public ArrayList<byte[]> get_Encrypted();
+   A getter method which returns a list of the of all the RSA blinded messages.
+   
 -->public ArrayList<byte[]> challenge_merchant(String chal);
+   A method which takes in the challenge bits from the merchant as parameter and returns an Arraylist of R or S values 
+   corresponding to the challenge bits. If the bit is 0 then we add R to the Arraylist, or if 1 we add S to the Arraylist.
+   ex. challenge bits '1001100111'
+   Then ArrayList returned will contain (S1,R2,R3,S4,S5,R6,R7,S8,S9,S10)
 
 
 
 Bank Class
 This class contains the following methods:
+
 -->public int to_selectorder();
+   This method returns an Integer value, It corresponds to a random order selected out of the total number of orders.
+   This random order selected will be blindly signed by the bank.
+   ex. int blind_signorder=to_selectorder();
+       System.out.println(blind_signorder);
+       Console output= if total orders are 10 
+                       4 ( random order selected)
+   
 -->public String unblindingmoney(ArrayList<BigInteger> a1, ArrayList<byte[]> a2,BigInteger e1, BigInteger n1);
--->private void writing_id()throws IOException;
+   This method will unblind all the messages except the one the bank will blindly sign. It does this using the 
+   pivate key, and the random keys created by the Customer used to encrypt the order.
+   
 -->public boolean ID_check(String idtocheck);
+   This method is used to check if all the ID's in the various money orders are unique. If the ID's are not unique 
+   then the bank will not sign the money order. It returns 1 if the money order is being signed or returns 0 if it 
+   has refused to not sign the money order.
+   
 -->public boolean money_check();
+   This method checks if all the money order have the same amount. It returns 1 if it is valid and going to sign the 
+   money order. It will return a 0 if it finds that a particular money order has a amount value different from the other
+   orders.
+   
 -->public byte[] Signature();
+   This method signs the message blindly and sends it back to the customer.
+   
 -->public String Reveal_Identity();
 
 
 Merchant Class
+This class contains the following methods:
+
 -->public String challenge();
+   When this method is called it returns a random bit string of length 10.
+   ex. String temp = Challenge();
+       System.out.println(temp);
+       Console Output: 1010100101
+   
 -->public boolean tocheckhash(ArrayList<byte[]> temp_2)throws IOException;
+   This method takes a byte[] parameter which contains the R,S values corresponding to the challenge bits.
+   When this method is called it computes and checks if the hash values in the Money order, is same as hash values of 
+   R,S corresponding to the challenge bits.
+   
 -->public String received_orderfromCustomer(byte[] received,BigInteger public_key1,BigInteger Mod);
+   It will first check for the signature of the bank by using the public key and modulus taken as the parameter.
+   This method will decrypt the signed message from the bank.
+   
