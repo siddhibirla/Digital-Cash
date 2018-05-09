@@ -2,7 +2,10 @@
 
 The code is written in Java 8. Download the files and run the Init Class on terminal using the following commands:
 1. javac Init.java
-2. java Init
+2. javac Bank.java
+3. javac Customer.java
+4. javac Merchant.java
+5. java Init
 
 Init Class
 --> Displays Customer,Merchant,Bank or Exit option
